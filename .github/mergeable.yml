@@ -1,0 +1,20 @@
+version: 2
+mergeable:
+  - when: pull_request.*, pull_request_review.*
+    validate:
+      - do: headRef
+        must_include:
+          regex: ^(feature|hotfix)\/.+$
+          message: Your pull request doesn't adhere to the branch naming convention
+      - do: baseRef
+        must_include:
+          regex: ^develop$
+          message: Base ref must be develop
+      - do: approvals
+        min:
+          count: 1
+        required:
+          reviewers: [tiennguyendang]
+    pass:
+      - do: merge
+        merge_method: "merge"
