@@ -1,36 +1,37 @@
+import React, { useState, createContext } from 'react';
+import Login from '../screens/UserLoginScreen/UserLoginScreen';
+import Task from '../screens/TaskContact/TaskContactScreen';
+import CreateTask from '../screens/CreateTaskScreen/CreateTaskScreen';
+import EditTask from '../screens/EditTaskScreen/EditTaskScreen';
+import CurrentUser from '../screens/CurentUserScreen/CurrentUserScreen';
+import EditUser from '../screens/EditUserScreen/EditUserScreen';
+import MainLayout from '../layouts/MainLayout/MainLayout';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import React, {useState } from 'react';
-import Header from 'components/Header/Header';
-import Login from '../screens/UserLogin/UserLogin';
-import Task from '../screens/TaskContact/TaskContact';
-import CreateTask from '../screens/CreateTask/CreateTask';
-import EditTask from '../screens/EditTask/EditTask';
-import CurrentUser from '../screens/CurentUser/CurrentUser';
-import EditUser from '../screens/EditUser/EditUser';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom';
+export const TokenContext = createContext();
 
-function Routers(){
-    const [isSignedIn, setIsSignedIn] = useState(false);
-    if (!isSignedIn) {
-        return (
-          <div>
-              <Login setToken={setIsSignedIn}/>             
-           </div>
-        );
-        
-      }
-      return (
-            <Router basename={process.env.PUBLIC_URL}>
-              <Header setToken={setIsSignedIn}/>
-              <Switch>
-              <Route exact path="/" component={Task} />
-              <Route exact path="/CreateTask" component={CreateTask} />
-              <Route exact path="/EditTask/:id" component={EditTask} />
-              <Route exact path="/InfoUser/:id" component={CurrentUser} />
-              <Route exact path="/EditUser/:id" component={EditUser} />
-              </Switch>
-              </Router> 
-      );
-    }
+export default function Routers() {
+  const [isSignedIn, setIsSignedIn] = useState();
+  const token = window.localStorage.getItem('token');
 
-export default Routers
+  const RedirectComponent = (Component,Layout) => {
+    if(!token)
+    return isSignedIn ? <Layout><Component/></Layout> : <Redirect to='/Login' />
+    else
+    return <Layout><Component/></Layout>
+  }
+  return (
+      <TokenContext.Provider value={{isSignedIn,setIsSignedIn}}>
+      <Router basename={process.env.PUBLIC_URL}>
+        <Switch>
+          <Route exact path="/Login" component={Login} /> 
+          <Route exact path="/" render={() => RedirectComponent(Task, MainLayout)} />
+          <Route exact path="/CreateTask" render={() => RedirectComponent(CreateTask,MainLayout)} />
+          <Route exact path="/EditTask/:id" render={() => RedirectComponent(EditTask,MainLayout)} />
+          <Route exact path="/InfoUser/:id" render={() => RedirectComponent(CurrentUser,MainLayout)} />
+          <Route exact path="/EditUser/:id" render={() => RedirectComponent(EditUser,MainLayout)} />
+        </Switch>
+      </Router>
+      </TokenContext.Provider>
+  );
+}

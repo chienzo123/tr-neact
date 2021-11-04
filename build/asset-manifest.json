@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/tr-neact/static/css/main.41baeee3.chunk.css",
+    "main.js": "/tr-neact/static/js/main.3b92a9b5.chunk.js",
+    "main.js.map": "/tr-neact/static/js/main.3b92a9b5.chunk.js.map",
+    "runtime-main.js": "/tr-neact/static/js/runtime-main.81e3fc05.js",
+    "runtime-main.js.map": "/tr-neact/static/js/runtime-main.81e3fc05.js.map",
+    "static/css/2.0978f8b3.chunk.css": "/tr-neact/static/css/2.0978f8b3.chunk.css",
+    "static/js/2.3dabf00c.chunk.js": "/tr-neact/static/js/2.3dabf00c.chunk.js",
+    "static/js/2.3dabf00c.chunk.js.map": "/tr-neact/static/js/2.3dabf00c.chunk.js.map",
+    "index.html": "/tr-neact/index.html",
+    "static/css/2.0978f8b3.chunk.css.map": "/tr-neact/static/css/2.0978f8b3.chunk.css.map",
+    "static/css/main.41baeee3.chunk.css.map": "/tr-neact/static/css/main.41baeee3.chunk.css.map",
+    "static/js/2.3dabf00c.chunk.js.LICENSE.txt": "/tr-neact/static/js/2.3dabf00c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.81e3fc05.js",
+    "static/css/2.0978f8b3.chunk.css",
+    "static/js/2.3dabf00c.chunk.js",
+    "static/css/main.41baeee3.chunk.css",
+    "static/js/main.3b92a9b5.chunk.js"
+  ]
+}
